@@ -21,17 +21,20 @@ search.addWidgets([
   instantsearch.widgets.hits({
   container: '#hits',
   templates: {
+    // The "empty" template shows if no results are found
+    empty: (results) => `No results found for "${results.query}"`,
+    
+    // The "item" template renders each movie
     item(hit, { html, components }) {
       return html`
-        <article style="padding: 15px; border-bottom: 1px solid #ccc;">
-          <h2 style="color: #004b88; margin-bottom: 5px;">
+        <div class="movie-item" style="margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+          <h3 style="margin: 0; color: #004b88;">
             ${components.Highlight({ hit, attribute: 'title' })}
-          </h2>
-          <p style="font-size: 14px; color: #333;">
-            ${components.Snippet({ hit, attribute: 'content' })}
+          </h3>
+          <p style="margin: 5px 0; font-size: 14px; color: #333;">
+            ${components.Snippet({ hit, attribute: 'overview' })}
           </p>
-          <small style="color: #666;">Category: ${hit.category || 'General'}</small>
-        </article>
+        </div>
       `;
     },
   },
