@@ -2,7 +2,7 @@
 const searchClient = algoliasearch('D0YX2JPAZD', 'ea7088907b08ee64a555c99a259f6718');
 
 const search = instantsearch({
-  indexName: 'ca_pages',
+  indexName: 'algolia_movie_sample_dataset',
   searchClient,
 });
 
