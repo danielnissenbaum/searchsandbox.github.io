@@ -18,28 +18,22 @@ search.addWidgets([
   }),
 
   // Add a basic hits widget so you can see it working
+ search.addWidgets([
   instantsearch.widgets.hits({
-  container: '#hits',
-  templates: {
-    // The "empty" template shows if no results are found
-    empty: (results) => `No results found for "${results.query}"`,
-    
-    // The "item" template renders each movie
-    item(hit, { html, components }) {
-      console.log('Found a movie:', hit); // This prints the data to your browser console
-    return `Found: ${hit.title}`,html
-        <div class="movie-item" style="margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
-          <h3 style="margin: 0; color: #004b88;">
-            ${components.Highlight({ hit, attribute: 'title' })}
-          </h3>
-          <p style="margin: 5px 0; font-size: 14px; color: #333;">
-            ${components.Snippet({ hit, attribute: 'overview' })}
-          </p>
+    container: '#hits',
+    templates: {
+      // If no results come back, this will tell us
+      empty: (results) => `<div>No results found for "${results.query}"</div>`,
+      
+      // Use raw data fields (no components)
+      item: (hit) => `
+        <div style="padding: 10px; border-bottom: 1px solid #ddd;">
+          <h3 style="color: blue;">${hit.title}</h3>
+          <p>${hit.overview}</p>
         </div>
-      `;
+      `,
     },
-  },
-})
+  })
 ]);
 
 search.start();
